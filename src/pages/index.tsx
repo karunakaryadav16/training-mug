@@ -77,13 +77,13 @@ const Home: React.FC = () => {
       <SearchBar onChange={handleSearch} />
       <PictureSection
         pictures={filteredPictures}
-        savedPictures={savedPictures}
+{/*         savedPictures={savedPictures} */}
         onSave={handleSavePicture}
         onUnsave={handleUnsavePicture}
       />
       <PostSection
         posts={filteredPosts}
-        savedPosts={savedPosts}
+{/*         savedPosts={savedPosts} */}
         onSave={handleSavePost}
         onUnsave={handleUnsavePost}
       />
