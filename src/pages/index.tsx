@@ -1,10 +1,75 @@
 
 
 
-import React from "react";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { savePicture, unsavePicture, savePost, unsavePost } from "../store/slice";
+import { RootState } from "../store";
+import { savePicture, savePost, unsavePicture, unsavePost } from "../store/slice";
 import PictureSection from "../components/axios";
 import PostSection from "../components/post";
 import SearchBar from "../components/search";
@@ -23,25 +88,22 @@ interface Post {
 
 const Home: React.FC = () => {
   const dispatch = useDispatch();
-  const savedPictures = useSelector((state: any) => state.savedItems.savedPictures);
-  const savedPosts = useSelector((state: any) => state.savedItems.savedPosts);
+  const { savedPictures, savedPosts } = useSelector((state: RootState) => state.savedItems);
 
-  const [pictures, setPictures] = React.useState<Picture[]>([]);
-  const [posts, setPosts] = React.useState<Post[]>([]);
-  const [searchQuery, setSearchQuery] = React.useState("");
+  const [pictures, setPictures] = useState<Picture[]>([]);
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
-  React.useEffect(() => {
+  useEffect(() => {
     axios.get("https://jsonplaceholder.typicode.com/photos")
-    .then((response) => {
-      console.log(response)
-      setPictures(response.data.slice(0, 20));
-    });
+      .then((response) => {
+        setPictures(response.data.slice(0, 20));
+      });
 
     axios.get("https://jsonplaceholder.typicode.com/posts")
-    .then((response) => {
-      // console.log(response)
-      setPosts(response.data.slice(0, 20));
-    });
+      .then((response) => {
+        setPosts(response.data.slice(0, 20));
+      });
   }, []);
 
   const handleSavePicture = (id: number) => {
@@ -77,13 +139,13 @@ const Home: React.FC = () => {
       <SearchBar onChange={handleSearch} />
       <PictureSection
         pictures={filteredPictures}
-
+        savedPictures={savedPictures}
         onSave={handleSavePicture}
         onUnsave={handleUnsavePicture}
       />
       <PostSection
         posts={filteredPosts}
-
+        savedPosts={savedPosts}
         onSave={handleSavePost}
         onUnsave={handleUnsavePost}
       />
@@ -92,3 +154,34 @@ const Home: React.FC = () => {
 };
 
 export default Home;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
