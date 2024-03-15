@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface SavedItemsState {
+export interface SavedItemsState {
   savedPictures: number[];
   savedPosts: number[];
 }
 
 const initialState: SavedItemsState = {
   savedPictures: [],
-  savedPosts:[],
+  savedPosts: [],
 };
 
 const savedItemsSlice = createSlice({
@@ -29,5 +29,6 @@ const savedItemsSlice = createSlice({
   },
 });
 
-export const { savePicture, unsavePicture, savePost, unsavePost } = savedItemsSlice.actions;
+export const { savePicture, savePost, unsavePicture, unsavePost } = savedItemsSlice.actions;
 export default savedItemsSlice.reducer;
+
